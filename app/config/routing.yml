@@ -1,3 +1,8 @@
+espectaculos:
+    resource: "@EspectaculosBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 tnt2017_blog:
     resource: "@Tnt2017BlogBundle/Controller/"
     type:     annotation
