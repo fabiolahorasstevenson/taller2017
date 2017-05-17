@@ -12,8 +12,10 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+    	$posts = $this->getDoctrine()->getRepository('Tnt2017BlogBundle:Post')->findAll();
+
         return $this->render('Tnt2017BlogBundle:Default:index.html.twig', array(
-        	'posts' => $this->generarArray()
+        	'posts' => $posts
         ));
     }
 
@@ -38,11 +40,10 @@ class DefaultController extends Controller
      */
     public function showAction ($id)
     {
-    	$posts = $this-> generarArray();
+    	$post = $this->getDoctrine()->getRepository('Tnt2017BlogBundle:Post')->find($id);
 
     	return $this->render('Tnt2017BlogBundle:Default:show.html.twig',array(
-    		'post' => $posts[$id]
+    		'post' => $post
     	));
     }
-
 }
