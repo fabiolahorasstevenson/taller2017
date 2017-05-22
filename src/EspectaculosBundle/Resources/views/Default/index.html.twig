@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>* Espectáculos *</title>
-</head>
-<body>
- <h2> Listado de espectáculos </h2>
-	
-	<ul>
-		
+{% extends 'base.html.twig' %}
 
-		{% for e in espectaculos %}
-		<li>
-			<a href="{{ path('show_post', {'id': post.id}) }}">{{post.title}}</a>
-		</li>	
-		{% endfor %}
-	</ul>
-				
-</body>
-</html> 
+{% block body %}
+Hello world ! 
+{% endblock %}
