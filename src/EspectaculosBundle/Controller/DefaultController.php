@@ -12,6 +12,11 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('EspectaculosBundle:Default:index.html.twig');
+        $espectaculos = $this->getDoctrine()->getRepository('EspectaculosBundle:Espectaculo')->findAll();
+
+        return $this->render('EspectaculosBundle:Default:index.html.twig', array(
+        	'espectaculos' => $espectaculos
+        ));
     }
+    
 }
