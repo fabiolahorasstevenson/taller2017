@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>* Clase del viernes 28-04-17 - Symfony *</title>
+	<title>* Espectáculos *</title>
 </head>
 <body>
- <h2> Listado de posts </h2>
-	<!--<a href="https://symfony.com/doc/current/contributing/community/releases.html#version-history"> -->
+ <h2> Listado de espectáculos </h2>
+	
 	<ul>
-		<!-- {{dump(posts)}} --> 
+		
 
-		{% for post in posts %}
+		{% for e in espectaculos %}
 		<li>
 			<a href="{{ path('show_post', {'id': post.id}) }}">{{post.title}}</a>
 		</li>	
