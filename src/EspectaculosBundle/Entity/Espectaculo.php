@@ -37,7 +37,7 @@ class Espectaculo
   protected $fechaFin;
 
   /**
-   * @ORM\Column(type="string", length=100) 
+   * @ORM\Column(type="text") 
    */
   protected $imagen;
 

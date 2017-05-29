@@ -28,7 +28,7 @@ class LoadTipoEspectaculos extends AbstractFixture implements OrderedFixtureInte
 		$manager->persist($Tipo);
 		$manager->flush();
 
-		$this->addReference('cine',$Tipo);
+		$this->addReference('show',$Tipo);
 
 	}
 
