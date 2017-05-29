@@ -3,22 +3,25 @@
 {% block body %}
 <!-- Armar Home -->
 <!-- Crear un container -->
+<div class="page-header">
+  <h2>Espectáculos <small> Listado de próximos estrenos </small></h2>
+</div>
 <div class="container">
-	<h2>Listado de espectáculos</h2>
 	<!--{{ dump(espectaculos) }} -->
 	{% for espectaculo in espectaculos %}
 	<div class="media">
 	  <div class="media-left">
-	    <a href="#">
+	     <a href="{{ path('show_espectaculo', {'id': espectaculo.id}) }}">
 	      <img class="media-object" style="width: 64px; height: 64px" src="{{ espectaculo.imagen}}" alt="Nombre del espectáculo">
 	    </a>
 	  </div>
 	  <div class="media-body">
-	    <h4 class="media-heading"> {{ espectaculo.nombre }}</h4>
-	    {{ espectaculo.descripcion }}
+	     <h4 class="media-heading"> {{ espectaculo.nombre }}</h4> 
+	     {{ espectaculo.descripcion }} 
+
 	    
-	  </div>
-	</div>
-	{% endfor %}
+	 </div>
+  </div>
+  {% endfor %}
 </div>
 {% endblock %}

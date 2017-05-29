@@ -146,4 +146,10 @@ class Espectaculo
   {
     $this->tipoespectaculo = $aTipoEspectaculo;
   }
+
+  public function getFechaToString ($aFechaInicio)
+  {
+    // Hacer !! 
+
+  }
 }

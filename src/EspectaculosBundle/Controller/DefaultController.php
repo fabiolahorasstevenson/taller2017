@@ -18,5 +18,16 @@ class DefaultController extends Controller
         	'espectaculos' => $espectaculos
         ));
     }
-    
+	/**
+     * @Route("/espectaculo/{id}", name="show_espectaculo")
+     */
+    public function showAction ($id)
+    {
+    	$espectaculos = $this->getDoctrine()->getRepository('EspectaculosBundle:Espectaculo')->find($id);
+
+    	return $this->render('EspectaculosBundle:Default:show.html.twig',array(
+    		'espectaculos' => $espectaculos
+    	));
+    }    
 }
+
