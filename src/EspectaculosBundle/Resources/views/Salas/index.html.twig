@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<!-- Armar Home -->
+<!-- Crear un container -->
+<div class="page-header">
+  <h2>Salas <small> Listado de salas </small></h2>
+</div>
+<div class="container">
+	<!--{{ dump(salas) }} -->
+	{% for sala in salas %}
+	<div class="media">
+	  <div class="media-left">
+	     <a href="{{ path('show_sala', {'id': sala.id}) }}">
+	      <img class="media-object" style="width: 64px; height: 64px" src="{{ sala.imagen}}" alt="Imágen de la sala" title="Sala">
+	    </a>
+	  </div>
+	  <div class="media-body">
+	     <h4 class="media-heading"> {{ sala.nombre }}</h4> 
+	     {{ sala.direccion }} 
+	    
+	 </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %} 
