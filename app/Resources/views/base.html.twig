@@ -2,20 +2,20 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Web Espéctalos!{% endblock %}</title>
+        <title>{% block title %}Web Espéctaculos!{% endblock %}</title>
         <link rel="icon" type="image/x-icon" href="{{ asset('ticket.png') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css')}}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-      <div class="container" >
       {% include 'navbar.html.twig' %}
-      </div>
+      <div class="container" >
         {% block body %}{% endblock %}
         <script type="text/javascript" src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }} "></script>
         {% block javascripts %}{% endblock %}
+        {% include 'footer.html.twig' %} 
+      </div>  
     </body>
-  {% include 'footer.html.twig' %} 
 </html>

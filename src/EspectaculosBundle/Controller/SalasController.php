@@ -7,10 +7,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EspectaculosBundle\Entity\Sala;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/salas")
+ */
 class SalasController extends Controller
 {
     /**
-     * @Route("/salas", name= "sala_index")
+     * @Route("/", name= "sala_index")
      */
     public function indexAction()
     {
@@ -20,22 +23,11 @@ class SalasController extends Controller
         	'salas' => $salas
         ));
     }
-	/**
-     * @Route("/salas/{id}", name="show_sala")
-     */
-    public function showAction ($id)
-    {
-    	$salas = $this->getDoctrine()->getRepository('EspectaculosBundle:Sala')->find($id);
 
-    	return $this->render('EspectaculosBundle:Salas:show.html.twig',array(
-    		'salas' => $salas
-    	));
-    }  
-
-    /**
-     * @Route("/salas/new", name="new_sala")
+     /**
+     * @Route("/new", name="new_sala")
      */
-    public function newAction()  
+    public function newAction(Request $request)  
     {
 
         $sala = new Sala();
@@ -46,10 +38,35 @@ class SalasController extends Controller
             ->add('imagen','text')
             ->add('latitud','text')
             ->add('longitud','text')
+            ->add('Guardar','submit')
             ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isValid())
+        {
+            // guardar el objeto en la base
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($sala);
+            $em->flush();
+            return $this->redirect($this->generateUrl('sala_index'));
+        }
 
         return $this->render('EspectaculosBundle:Salas:new.html.twig',array
             ('form'=> $form->createView(),
         ));
     }
+
+	/**
+     * @Route("/show/{id}", name="show_sala")
+     */
+    public function showAction ($id)
+    {
+    	$salas = $this->getDoctrine()->getRepository('EspectaculosBundle:Sala')->find($id);
+
+    	return $this->render('EspectaculosBundle:Salas:show.html.twig',array(
+    		'salas' => $salas
+    	));
+    }  
+
+   
 }
