@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Espectaculo</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ espectaculo.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ espectaculo.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Descripcion</th>
+                <td>{{ espectaculo.descripcion }}</td>
+            </tr>
+            <tr>
+                <th>Fechainicio</th>
+                <td>{% if espectaculo.fechaInicio %}{{ espectaculo.fechaInicio|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fechafin</th>
+                <td>{% if espectaculo.fechaFin %}{{ espectaculo.fechaFin|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Imagen</th>
+                <td>{{ espectaculo.imagen }}</td>
+            </tr>
+            <tr>
+                <th>Monto</th>
+                <td>{{ espectaculo.monto }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('espectaculo_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('espectaculo_edit', { 'id': espectaculo.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

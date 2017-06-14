@@ -116,5 +116,10 @@ class Sala
   {
     $this->latitud = $aLatitud;
   }
+
+  public function __toString ()
+  {
+    return $this->getNombre();
+  }
     
   }

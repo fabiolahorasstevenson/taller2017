@@ -52,6 +52,34 @@ class TiposEspectaculosController extends Controller
     }
 
     /**
+     * @Route("/edit/{id}", name="edit_tipoEspectaculos")
+     */
+    public function editAction($id)  
+    {
+
+        $tiposEspectaculos = $this->getDoctrine()->getRepository('EspectaculosBundle:Tipo')->find($id);
+        $form= $this->createFormBuilder($tiposEspectaculos)
+                    ->add('nombre','text')
+                    ->add('Guardar','submit')
+                    ->getForm();
+
+        $request = $this->getRequest();
+
+        $form->handleRequest($request);
+        if ($form->isValid())
+        {
+            // guardar el objeto en la base
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($tiposEspectaculos);
+            $em->flush();
+            return $this->redirect($this->generateUrl('tiposespectaculos_index'));
+        }
+
+        return $this->render('EspectaculosBundle:TiposEspectaculos:edit.html.twig',array
+            ('form'=> $form->createView(),
+        ));
+    }
+    /**
      * @Route("/show/{id}", name="show_tipoEspectaculos")
      */
     public function showAction ($id)

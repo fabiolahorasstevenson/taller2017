@@ -42,5 +42,9 @@ class Tipo
   {
   	$this->nombre = $aNombre;
   }
-  	
+  
+  public function __toString ()
+  {
+    return $this->getNombre();
+  }	
 }

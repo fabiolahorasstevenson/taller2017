@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<!-- Armar Home -->
+<!-- Crear un container -->
+<div class="page-header">
+	<div class="container">
+	<div class="row">
+	<div class= "col-sm-4">
+		{{ form (form) }}
+	</div>
+	<div class= "col-sm-8">
+		<a href= "{{ path('espectaculos_index') }}" class="btn btn-default" > Todos </a> 
+	</div>	
+
+  	</div>	
+  	</div>
+  	 <h2>Espectáculos <small> Listado de próximos estrenos </small></h2>
+
+</div>
+<div class="container">
+	<!--{{ dump(espectaculos) }} -->
+	{% for espectaculo in espectaculos %}
+	<div class="media">
+	  <div class="media-left">
+	     <a href="{{ path('show_espectaculo', {'id': espectaculo.id}) }}">
+	      <img class="media-object" style="width: 64px; height: 64px" src="{{ espectaculo.imagen}}" alt="Imágen del espectáculo" title="Ver detalle del espectáculo">
+	    </a>
+	  </div>
+	  <div class="media-body">
+	     <h4 class="media-heading"> {{ espectaculo.nombre }}</h4> 
+	     {{ espectaculo.descripcion }} 
+	     <br>
+	     {{ espectaculo.fechaInicio | date("d/m/Y")}}
+	    
+	 </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

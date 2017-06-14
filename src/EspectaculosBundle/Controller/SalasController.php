@@ -56,7 +56,41 @@ class SalasController extends Controller
         ));
     }
 
-	/**
+    /**
+     * @Route("/edit/{id}", name="edit_sala")
+     */
+    public function editAction($id)  
+    {
+
+        $salas = $this->getDoctrine()->getRepository('EspectaculosBundle:Sala')->find($id);
+
+        $form= $this->createFormBuilder($salas)
+            ->add('nombre','text')
+            ->add('descripcion','text')
+            ->add('direccion','text')
+            ->add('imagen','text')
+            ->add('latitud','text')
+            ->add('longitud','text')
+            ->add('Guardar','submit')
+            ->getForm();
+
+        $request = $this->getRequest();
+        $form->handleRequest($request);
+        if ($form->isValid())
+        {
+            // guardar el objeto en la base
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($salas);
+            $em->flush();
+            return $this->redirect($this->generateUrl('sala_index'));
+        }
+
+        return $this->render('EspectaculosBundle:Salas:edit.html.twig',array
+            ('form'=> $form->createView(),
+        ));
+    }
+
+  	/**
      * @Route("/show/{id}", name="show_sala")
      */
     public function showAction ($id)
