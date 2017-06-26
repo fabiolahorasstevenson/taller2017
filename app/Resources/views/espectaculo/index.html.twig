@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Espectaculos list</h1>
+    <h1>Listado de espectáculos</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>id</th>
                 <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Fechainicio</th>
-                <th>Fechafin</th>
+                <th>Descripción</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
                 <th>Imagen</th>
                 <th>Monto</th>
-                <th>Actions</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -22,17 +22,18 @@
                 <td><a href="{{ path('espectaculo_show', { 'id': espectaculo.id }) }}">{{ espectaculo.id }}</a></td>
                 <td>{{ espectaculo.nombre }}</td>
                 <td>{{ espectaculo.descripcion }}</td>
-                <td>{% if espectaculo.fechaInicio %}{{ espectaculo.fechaInicio|date('Y-m-d') }}{% endif %}</td>
-                <td>{% if espectaculo.fechaFin %}{{ espectaculo.fechaFin|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ espectaculo.imagen }}</td>
+                <td>{% if espectaculo.fechaInicio %}{{ espectaculo.fechaInicio|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if espectaculo.fechaFin %}{{ espectaculo.fechaFin|date('d-m-Y') }}{% endif %}</td>
+                <td><img class="media-object" style="width: 64px; height: 64px" src="{{ espectaculo.imagen }}"> </td>
+
                 <td>{{ espectaculo.monto }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('espectaculo_show', { 'id': espectaculo.id }) }}">show</a>
+                            <a href="{{ path('espectaculo_show', { 'id': espectaculo.id }) }}">Ver</a>
                         </li>
                         <li>
-                            <a href="{{ path('espectaculo_edit', { 'id': espectaculo.id }) }}">edit</a>
+                            <a href="{{ path('espectaculo_edit', { 'id': espectaculo.id }) }}">Editar</a>
                         </li>
                     </ul>
                 </td>
@@ -43,7 +44,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('espectaculo_new') }}">Create a new espectaculo</a>
+            <a href="{{ path('espectaculo_new') }}">Agregar un nuevo espectáculo</a>
         </li>
     </ul>
 {% endblock %}

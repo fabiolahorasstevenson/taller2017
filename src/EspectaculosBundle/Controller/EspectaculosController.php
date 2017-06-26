@@ -16,12 +16,21 @@ class EspectaculosController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $translated = $this->get('translator')->trans('Symfony2 is great');
+        echo $translated;  
+        $locale = $request->getLocale();
+        echo $locale;
+        die($locale);
+
         # $espectaculos = $this->getDoctrine()->getRepository('EspectaculosBundle:Espectaculo')->findAll();
 
         $form = $this->createFormBuilder()    
                      -> setMethod('GET')
-                     -> add ('nombre','text')
-                     -> add ('descripcion','text')
+                     -> add ('Nombre','text')
+                     -> add ('Descripcion','text')
+                     -> add ('Fecha','date')
+                     -> add ('Sala','text')
+                     -> add ('TipoEspectaculo','text')
                      -> add ('filtrar','submit')
                      -> getForm();
 
@@ -47,16 +56,20 @@ class EspectaculosController extends Controller
         	'espectaculos' => $espectaculos, 'form'=> $form->createView(),
         ));
     }
+
 	/**
-     * @Route("/espectaculo/{id}", name="show_espectaculo")
+     * @Route("/espectaculo/{id}", name="espectaculo_show")
      */
     public function showAction ($id)
     {
-    	$espectaculos = $this->getDoctrine()->getRepository('EspectaculosBundle:Espectaculo')->find($id);
+        $espectaculos = $this->getDoctrine()->getRepository('EspectaculosBundle:Espectaculo')->find($id);
 
     	return $this->render('EspectaculosBundle:EspectaculosFrontend:show.html.twig',array(
     		'espectaculos' => $espectaculos
     	));
+
+
+
     }    
 }
 

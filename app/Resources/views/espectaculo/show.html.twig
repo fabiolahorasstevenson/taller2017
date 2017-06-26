@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Espectaculo</h1>
+    <h1>Espectáculos</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>id</th>
                 <td>{{ espectaculo.id }}</td>
             </tr>
             <tr>
@@ -14,16 +14,16 @@
                 <td>{{ espectaculo.nombre }}</td>
             </tr>
             <tr>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <td>{{ espectaculo.descripcion }}</td>
             </tr>
             <tr>
-                <th>Fechainicio</th>
-                <td>{% if espectaculo.fechaInicio %}{{ espectaculo.fechaInicio|date('Y-m-d') }}{% endif %}</td>
+                <th>Fecha inicio</th>
+                <td>{% if espectaculo.fechaInicio %}{{ espectaculo.fechaInicio|date('d-m-Y') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Fechafin</th>
-                <td>{% if espectaculo.fechaFin %}{{ espectaculo.fechaFin|date('Y-m-d') }}{% endif %}</td>
+                <th>Fecha fin</th>
+                <td>{% if espectaculo.fechaFin %}{{ espectaculo.fechaFin|date('d-m-Y') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Imagen</th>
@@ -38,10 +38,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('espectaculo_index') }}">Back to the list</a>
+            <a href="{{ path('espectaculo_index') }}">Volver a la lista</a>
         </li>
         <li>
-            <a href="{{ path('espectaculo_edit', { 'id': espectaculo.id }) }}">Edit</a>
+            <a href="{{ path('espectaculo_edit', { 'id': espectaculo.id }) }}">Editar</a>
         </li>
         <li>
             {{ form_start(delete_form) }}

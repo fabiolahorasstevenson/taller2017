@@ -6,24 +6,23 @@
 <div class="page-header">
 	<div class="container">
 	<div class="row">
+	<div class= "col-sm-12">
+
 	<div class= "col-sm-4">
+	<p>Filtros de búsqueda</p>
 		{{ form (form) }}
+		<a href= "{{ path('espectaculos_index') }}" class="btn btn-default" > Todos </a> 
+
 	</div>
 	<div class= "col-sm-8">
-		<a href= "{{ path('espectaculos_index') }}" class="btn btn-default" > Todos </a> 
-	</div>	
+	 <h2>Espectáculos <small> Listado de próximos estrenos </small></h2>
 
-  	</div>	
-  	</div>
-  	 <h2>Espectáculos <small> Listado de próximos estrenos </small></h2>
-
-</div>
 <div class="container">
 	<!--{{ dump(espectaculos) }} -->
 	{% for espectaculo in espectaculos %}
 	<div class="media">
 	  <div class="media-left">
-	     <a href="{{ path('show_espectaculo', {'id': espectaculo.id}) }}">
+	     <a href="{{ path('espectaculo_show', {'id': espectaculo.id}) }}">
 	      <img class="media-object" style="width: 64px; height: 64px" src="{{ espectaculo.imagen}}" alt="Imágen del espectáculo" title="Ver detalle del espectáculo">
 	    </a>
 	  </div>
@@ -36,5 +35,11 @@
 	 </div>
   </div>
   {% endfor %}
+</div>
+</div>
+
+</div>	
+</div>	
+</div>
 </div>
 {% endblock %}

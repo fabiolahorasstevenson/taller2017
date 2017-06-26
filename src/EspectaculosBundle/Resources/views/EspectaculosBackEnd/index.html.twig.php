@@ -4,14 +4,14 @@
 <!-- Armar Home -->
 <!-- Crear un container -->
 <div class="page-header">
-  <h2>Espectáculos <small> Listado de próximos estrenos </small></h2>
+  <h2>Espectáculos <small> Espectáculos </small></h2>
 </div>
 <div class="container">
 	<!--{{ dump(espectaculos) }} -->
 	{% for espectaculo in espectaculos %}
 	<div class="media">
 	  <div class="media-left">
-	     <a href="{{ path('show_espectaculo', {'id': espectaculo.id}) }}">
+	     <a href="{{ path('espectaculos_show', {'id': espectaculo.id}) }}">
 	      <img class="media-object" style="width: 64px; height: 64px" src="{{ espectaculo.imagen}}" alt="Imágen del espectáculo" title="Ver detalle del espectáculo">
 	    </a>
 	  </div>

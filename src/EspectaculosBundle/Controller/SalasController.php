@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 class SalasController extends Controller
 {
     /**
-     * @Route("/", name= "sala_index")
+     * @Route("/", name= "sala_index" )
      */
     public function indexAction()
     {
