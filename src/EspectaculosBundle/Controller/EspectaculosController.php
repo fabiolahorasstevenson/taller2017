@@ -7,7 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/espectaculos")
+ * @Route("/")
  */
 class EspectaculosController extends Controller
 {
@@ -16,35 +16,71 @@ class EspectaculosController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $translated = $this->get('translator')->trans('Symfony2 is great');
-        echo $translated;  
-        $locale = $request->getLocale();
-        echo $locale;
-        die($locale);
+        #$translator = $this->get('translator');
+        #$translator->setLocale('it_IT');
+   
+        #$translated = $translator->trans('Symfony2 is great');
+        #echo $translated;  
+        #$this->get('session')->setLocale('en_US');
+
+        #$locale = $request->getLocale();
+        #echo $locale;
+        
 
         # $espectaculos = $this->getDoctrine()->getRepository('EspectaculosBundle:Espectaculo')->findAll();
 
         $form = $this->createFormBuilder()    
                      -> setMethod('GET')
-                     -> add ('Nombre','text')
-                     -> add ('Descripcion','text')
-                     -> add ('Fecha','date')
-                     -> add ('Sala','text')
-                     -> add ('TipoEspectaculo','text')
+                     -> add ('Nombre','text',array('required' =>false))
+                     -> add ('Descripcion','text',array('required' =>false))
+                     -> add ('Fecha','date',array('required' =>false))
+                     -> add ('Sala','entity', array('property' => 'nombre', 'class' => 'EspectaculosBundle:Sala', 'placeholder' => 'seleccione', 'empty_value' => 0,'required' => false))
+                     -> add ('TipoEspectaculo','entity',array('property' => 'nombre', 'class' => 'EspectaculosBundle:Tipo', 'placeholder' => 'seleccione', 'empty_value' => 0, 'required' => false))
                      -> add ('filtrar','submit')
                      -> getForm();
+
 
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder('p');
         $qb-> select('p')
            -> from('EspectaculosBundle:Espectaculo','p');
 
         $form ->handleRequest($request);
-        if ($form->isValid()){
+        if ($form->isValid())
+        { 
             $criteria= $form->getData();
-            $qb-> where ($qb->expr()->like('p.nombre','?1'))
-                ->setParameter(1,'%'.$criteria['nombre'].'%')
-                ->andWhere($qb->expr()->like('p.descripcion','?2'))
-                ->setParameter(2,'%'.$criteria['descripcion'].'%');
+            #dump($criteria);
+            #die();
+            $qb->where('1=1');
+            if (isset($criteria['Sala']))
+            {
+               $qb ->andWhere('p.sala = :sala')
+                   ->setParameter('sala',$criteria['Sala']);
+            } 
+            if (isset($criteria['TipoEspectaculo']))
+            {
+               $qb ->andWhere('p.tipoespectaculo = :tipo')
+                   ->setParameter('tipo',$criteria['TipoEspectaculo']);
+            } 
+            
+            if (isset($criteria['Nombre']))
+            {    
+                $qb ->andWhere($qb->expr()->like('p.nombre','?1'))
+                    ->setParameter(1,'%'.$criteria['Nombre'].'%');
+            }
+            if(isset($criteria['Descripcion']))
+            {    
+                $qb ->andWhere($qb->expr()->like('p.descripcion','?2'))
+                    ->setParameter(2,'%'.$criteria['Descripcion'].'%');
+            }
+
+            if(isset($criteria['Fecha']))
+            {
+               $qb ->andWhere('?3 >= p.fechaInicio')
+                   ->andWhere('?4 <= p.fechaFin')
+                   ->setParameter('3',$criteria['Fecha']->format('Y-m-d'))
+                   ->setParameter('4',$criteria['Fecha']->format('Y-m-d'));
+            }  
+            
                 
         }   
 
@@ -58,7 +94,7 @@ class EspectaculosController extends Controller
     }
 
 	/**
-     * @Route("/espectaculo/{id}", name="espectaculo_show")
+     * @Route("/espectaculos/{id}", name="espectaculos_show")
      */
     public function showAction ($id)
     {

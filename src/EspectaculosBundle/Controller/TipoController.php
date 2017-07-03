@@ -72,7 +72,7 @@ class TipoController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-
+ 
     /**
      * Displays a form to edit an existing tipo entity.
      *

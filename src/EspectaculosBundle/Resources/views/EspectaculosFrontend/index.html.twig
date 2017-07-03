@@ -22,7 +22,7 @@
 	{% for espectaculo in espectaculos %}
 	<div class="media">
 	  <div class="media-left">
-	     <a href="{{ path('espectaculo_show', {'id': espectaculo.id}) }}">
+	     <a href="{{ path('espectaculos_show', {'id': espectaculo.id}) }}">
 	      <img class="media-object" style="width: 64px; height: 64px" src="{{ espectaculo.imagen}}" alt="Imágen del espectáculo" title="Ver detalle del espectáculo">
 	    </a>
 	  </div>
@@ -30,16 +30,20 @@
 	     <h4 class="media-heading"> {{ espectaculo.nombre }}</h4> 
 	     {{ espectaculo.descripcion }} 
 	     <br>
-	     {{ espectaculo.fechaInicio | date("d/m/Y")}}
+	     <p> Desde: {{ espectaculo.fechaInicio | date("d/m/Y")}}
+   	     Hasta: {{ espectaculo.fechaFin    | date("d/m/Y")}} </p>
+   	      <p>  Sala:  {{ espectaculo.sala.nombre }}</p>
+    	  <p>  Tipo:  {{ espectaculo.tipoespectaculo.nombre }}</p>
 	    
 	 </div>
   </div>
   {% endfor %}
 </div>
 </div>
+</div>	
+</div>	
+</div>
+</div>
+<!-- {% include 'footer.html.twig' %}  -->
 
-</div>	
-</div>	
-</div>
-</div>
 {% endblock %}
